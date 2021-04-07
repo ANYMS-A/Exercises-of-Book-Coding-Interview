@@ -26,10 +26,9 @@ bool find_duplicate(int numbers[], int length, int* duplication)
         {
             if (numbers[i] == numbers[numbers[i]])
             {
-                duplication = numbers[i];
+                *duplication = numbers[i];
                 return true;
             }
-
             // 交换第numbers[i]和numbers[numbers[i]]的值
             int temp = numbers[i];
             numbers[i] = numbers[temp];
@@ -39,16 +38,18 @@ bool find_duplicate(int numbers[], int length, int* duplication)
     return false;
 }
 
+//测试用例
 int main()
 {
     int numbers[] = {2,3,1,0,2,5,3};
     int length = 7;
-    int* duplication;
+    int* duplication = numbers;
     bool find = find_duplicate(numbers, length, duplication);
     if (find)
-        std::cout << duplication << std::endl;
+    {
+        std::cout << *duplication << std::endl;
+    }
     else
         std::cout << "Not find!" << std::endl;
-
     return 0;
 }
