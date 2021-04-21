@@ -2,6 +2,11 @@
 // Created by Criss Allan on 2021/4/18.
 //
 #include <iostream>
+#include <stack>
+/*
+ * 输入一个链表的头节点，从尾到头打印一个链表
+ * 考虑使用栈做数据结构
+*/
 
 struct ListNode
 {
@@ -34,14 +39,41 @@ void AddToTail(ListNode** pHead, int value)
     }
 }
 
+void printLinkedListReversely(ListNode* pHead)
+{
+    std::stack<ListNode*> nodes;
+    ListNode* tmpNode = pHead;
+    // 入栈
+    while(tmpNode != nullptr)
+    {
+        nodes.push(tmpNode);
+        tmpNode = tmpNode->next;
+    }
+    // 出栈
+    while(!nodes.empty())
+    {
+        ListNode *tmpNode = nodes.top();
+        std::cout << tmpNode->value << std::endl;
+        nodes.pop();
+    }
+}
+
 
 int main()
 {
     using namespace std;
 
-    ListNode node = ListNode();
-    cout << node.value << endl;
-    cout << node.next << endl;
+    auto* head = new ListNode();
+    head->value = -1;
+    head->next = nullptr;
+
+    for (int i = 0; i < 50; i++)
+    {
+        AddToTail(&head, i);
+    }
+
+    printLinkedListReversely(head);
+
     return 0;
 }
 
